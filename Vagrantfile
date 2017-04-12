@@ -15,6 +15,7 @@ Vagrant.configure(2) do |config|
   config.vm.define "web" do |web|
     #web.vm.box = "centos7"
     web.vm.network :forwarded_port, id: "ssh", guest: 22, host: 2223
+    web.vm.network "forwarded_port", guest: 80, host: 8080
     web.vm.network :private_network, ip: "192.168.33.20", virtualbox__intnet: "intnet"
   end
   # The most common configuration options are documented and commented below.
@@ -78,4 +79,5 @@ Vagrant.configure(2) do |config|
   #   sudo apt-get update
   #   sudo apt-get install -y apache2
   # SHELL
+  #config.vm.provision "shell", run: "always", inline: "systemctl restart network.service"
 end
